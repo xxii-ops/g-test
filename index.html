@@ -1,0 +1,2192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="theme-color" content="#f7f2e9">
+<title>测一测｜你的灵魂最像哪位古代女子</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;800&display=swap');
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --bg:#f7f3eb;
+    --paper:#fffdf8;
+    --paper2:#f4eee3;
+    --ink:#413b33;
+    --muted:#928879;
+    --gold:#ad9160;
+    --gold2:#d5bd91;
+    --line:rgba(139,111,68,.18);
+}
+
+body{
+    min-height:100vh;
+    background:
+        radial-gradient(circle at 12% 8%,rgba(255,255,255,.95),transparent 28%),
+        radial-gradient(circle at 90% 85%,rgba(225,207,176,.3),transparent 34%),
+        linear-gradient(135deg,#faf7f0,#f3ede2);
+    color:var(--ink);
+    font-family:"Noto Serif SC","Songti SC","STSong",serif;
+    overflow-x:hidden;
+}
+
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:.22;
+    background-image:
+        linear-gradient(rgba(120,100,70,.025) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(120,100,70,.025) 1px,transparent 1px);
+    background-size:18px 18px;
+}
+
+.page{
+    display:none;
+    min-height:100vh;
+    position:relative;
+    z-index:2;
+}
+
+.page.active{
+    display:block;
+}
+
+.container{
+    width:min(92%,540px);
+    margin:auto;
+}
+
+/* ================= 密码页 ================= */
+
+#passwordPage{
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:30px 0;
+}
+
+#passwordPage.active{
+    display:flex;
+}
+
+.password-box{
+    width:100%;
+    padding:48px 28px 42px;
+    background:rgba(255,253,248,.86);
+    border:1px solid var(--line);
+    box-shadow:0 25px 70px rgba(100,80,50,.08);
+    text-align:center;
+    position:relative;
+}
+
+.password-box:before,
+.password-box:after{
+    content:"";
+    position:absolute;
+    width:38px;
+    height:38px;
+}
+
+.password-box:before{
+    left:14px;
+    top:14px;
+    border-left:1px solid var(--gold2);
+    border-top:1px solid var(--gold2);
+}
+
+.password-box:after{
+    right:14px;
+    bottom:14px;
+    border-right:1px solid var(--gold2);
+    border-bottom:1px solid var(--gold2);
+}
+
+.small-title{
+    color:var(--gold);
+    font-size:11px;
+    letter-spacing:4px;
+    margin-bottom:18px;
+}
+
+.password-box h1{
+    font-size:27px;
+    font-weight:600;
+    letter-spacing:3px;
+    margin-bottom:12px;
+}
+
+.password-box p{
+    font-size:13px;
+    line-height:2;
+    color:var(--muted);
+    margin-bottom:28px;
+}
+
+.code-input{
+    width:100%;
+    height:52px;
+    border:1px solid var(--line);
+    background:#fff;
+    outline:none;
+    text-align:center;
+    font-size:20px;
+    letter-spacing:8px;
+    color:var(--ink);
+}
+
+.code-input:focus{
+    border-color:var(--gold2);
+}
+
+.main-btn{
+    width:100%;
+    height:52px;
+    margin-top:15px;
+    border:0;
+    background:linear-gradient(135deg,#b89c6c,#9d8050);
+    color:#fffdf7;
+    font-family:inherit;
+    letter-spacing:3px;
+    font-size:14px;
+    cursor:pointer;
+}
+
+.error{
+    min-height:20px;
+    margin-top:10px;
+    color:#ad6f62;
+    font-size:12px;
+}
+
+/* ================= 首页 ================= */
+
+#homePage{
+    padding:38px 0 40px;
+}
+
+.home{
+    text-align:center;
+}
+
+.top-mark{
+    width:68px;
+    height:68px;
+    border:1px solid var(--gold2);
+    border-radius:50%;
+    margin:8px auto 28px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--gold);
+    font-size:25px;
+    position:relative;
+}
+
+.top-mark:before,
+.top-mark:after{
+    content:"";
+    position:absolute;
+    width:8px;
+    height:8px;
+    border:1px solid var(--gold2);
+    transform:rotate(45deg);
+}
+
+.top-mark:before{
+    left:-5px;
+}
+
+.top-mark:after{
+    right:-5px;
+}
+
+.home .eyebrow{
+    color:var(--gold);
+    font-size:11px;
+    letter-spacing:5px;
+    margin-bottom:15px;
+}
+
+.home h1{
+    font-size:31px;
+    line-height:1.5;
+    letter-spacing:3px;
+    font-weight:600;
+}
+
+.home .subtitle{
+    margin-top:15px;
+    font-size:13px;
+    line-height:2;
+    color:var(--muted);
+}
+
+.intro-card{
+    margin-top:38px;
+    padding:30px 24px;
+    background:rgba(255,253,248,.78);
+    border:1px solid var(--line);
+    text-align:left;
+}
+
+.intro-line{
+    width:34px;
+    height:1px;
+    background:var(--gold);
+    margin-bottom:20px;
+}
+
+.intro-card p{
+    font-size:14px;
+    line-height:2.1;
+    color:#625a50;
+}
+
+.intro-info{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    margin-top:25px;
+    border-top:1px solid var(--line);
+    padding-top:20px;
+    text-align:center;
+}
+
+.intro-info div{
+    font-size:11px;
+    color:var(--muted);
+}
+
+.intro-info strong{
+    display:block;
+    color:var(--ink);
+    font-size:16px;
+    margin-bottom:5px;
+}
+
+.start-btn{
+    margin-top:22px;
+}
+
+/* ================= 测试页 ================= */
+
+#quizPage{
+    padding:24px 0 45px;
+}
+
+.quiz-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.quiz-label{
+    font-size:11px;
+    letter-spacing:3px;
+    color:var(--gold);
+}
+
+.quiz-count{
+    font-size:12px;
+    color:var(--muted);
+}
+
+.progress{
+    width:100%;
+    height:2px;
+    background:#e5ddd0;
+    margin-bottom:38px;
+}
+
+.progress-bar{
+    width:0;
+    height:100%;
+    background:var(--gold);
+    transition:.3s;
+}
+
+.question-number{
+    font-size:11px;
+    letter-spacing:3px;
+    color:var(--gold);
+    margin-bottom:17px;
+}
+
+.question{
+    font-size:23px;
+    line-height:1.65;
+    font-weight:600;
+    margin-bottom:28px;
+}
+
+.options{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.option{
+    position:relative;
+    min-height:64px;
+    padding:18px 19px;
+    background:rgba(255,253,248,.82);
+    border:1px solid var(--line);
+    color:#514a41;
+    font-family:inherit;
+    text-align:left;
+    font-size:14px;
+    line-height:1.7;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.option:hover{
+    border-color:var(--gold2);
+    transform:translateY(-1px);
+}
+
+.option.selected{
+    background:#f0e6d5;
+    border-color:var(--gold);
+    color:#40382e;
+}
+
+.option.selected:after{
+    content:"✓";
+    position:absolute;
+    right:16px;
+    top:50%;
+    transform:translateY(-50%);
+    color:var(--gold);
+}
+
+/* ================= 结果页 ================= */
+
+#resultPage{
+    padding:24px 0 50px;
+}
+
+.result-wrap{
+    position:relative;
+}
+
+.result-header{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.archive{
+    font-size:10px;
+    letter-spacing:5px;
+    color:var(--gold);
+    margin-bottom:13px;
+}
+
+.result-header h2{
+    font-size:14px;
+    font-weight:400;
+    color:var(--muted);
+    letter-spacing:3px;
+}
+
+.result-header h1{
+    margin-top:6px;
+    font-size:36px;
+    letter-spacing:6px;
+    font-weight:700;
+}
+
+/* 人物主卡 */
+
+.character-card{
+    position:relative;
+    overflow:hidden;
+    min-height:490px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    box-shadow:0 22px 70px rgba(95,73,42,.1);
+    padding:30px 22px 26px;
+}
+
+.character-card:before{
+    content:"";
+    position:absolute;
+    width:230px;
+    height:230px;
+    border:1px solid rgba(160,130,80,.15);
+    border-radius:50%;
+    top:-105px;
+    right:-80px;
+}
+
+.character-card:after{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    border:1px solid rgba(160,130,80,.12);
+    border-radius:50%;
+    bottom:-90px;
+    left:-80px;
+}
+
+.card-inner{
+    position:relative;
+    z-index:2;
+    text-align:center;
+}
+
+.period{
+    font-size:11px;
+    letter-spacing:3px;
+    color:var(--gold);
+}
+
+.symbol{
+    width:106px;
+    height:106px;
+    border-radius:50%;
+    margin:25px auto 20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:38px;
+    background:
+        radial-gradient(circle at 35% 30%,rgba(255,255,255,.9),transparent 45%),
+        var(--character-color);
+    box-shadow:
+        0 12px 35px rgba(100,80,50,.12),
+        inset 0 0 0 1px rgba(255,255,255,.55);
+    color:#fffdf8;
+}
+
+.character-title{
+    font-size:12px;
+    color:var(--muted);
+    letter-spacing:2px;
+    margin-bottom:10px;
+}
+
+.character-name{
+    font-size:33px;
+    letter-spacing:5px;
+    font-weight:700;
+}
+
+.quote{
+    max-width:350px;
+    margin:18px auto 0;
+    font-size:13px;
+    line-height:2;
+    color:#72695d;
+}
+
+/* 契合度 */
+
+.match-box{
+    margin-top:28px;
+    padding:21px 20px;
+    background:rgba(255,255,255,.58);
+    border:1px solid var(--line);
+}
+
+.match-label{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    color:var(--muted);
+    font-size:11px;
+    letter-spacing:2px;
+}
+
+.match-number{
+    color:var(--ink);
+    font-size:26px;
+    letter-spacing:1px;
+}
+
+.match-line{
+    height:2px;
+    background:#e5ddd0;
+    margin-top:13px;
+    overflow:hidden;
+}
+
+.match-fill{
+    height:100%;
+    width:0;
+    background:var(--character-color);
+    transition:1s ease;
+}
+
+/* 灵魂关键词 */
+
+.keyword-section{
+    margin-top:18px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:7px;
+}
+
+.keyword{
+    padding:6px 11px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.55);
+    font-size:11px;
+    color:#71695e;
+}
+
+/* 档案 */
+
+.archive-card{
+    margin-top:18px;
+    padding:28px 23px;
+    background:rgba(255,253,248,.9);
+    border:1px solid var(--line);
+}
+
+.section-label{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:var(--gold);
+    font-size:11px;
+    letter-spacing:3px;
+    margin-bottom:17px;
+}
+
+.section-label:after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--line);
+}
+
+.analysis{
+    font-size:14px;
+    line-height:2.15;
+    color:#5d554b;
+}
+
+.traits{
+    margin-top:25px;
+    display:flex;
+    flex-direction:column;
+    gap:13px;
+}
+
+.trait-row{
+    display:grid;
+    grid-template-columns:55px 1fr 35px;
+    gap:10px;
+    align-items:center;
+    font-size:11px;
+    color:#777064;
+}
+
+.trait-line{
+    height:3px;
+    background:#e8e0d3;
+}
+
+.trait-fill{
+    height:100%;
+    background:var(--character-color);
+}
+
+.trait-value{
+    text-align:right;
+    color:var(--gold);
+}
+
+.motto{
+    margin-top:26px;
+    padding:20px 17px;
+    background:var(--character-bg);
+    border-left:2px solid var(--character-color);
+    color:#655b4f;
+    font-size:14px;
+    line-height:2;
+}
+
+/* 底部按钮 */
+
+.result-buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:18px;
+}
+
+.secondary-btn{
+    height:52px;
+    border:1px solid var(--line);
+    background:rgba(255,253,248,.82);
+    color:#62594e;
+    font-family:inherit;
+    font-size:13px;
+    letter-spacing:2px;
+    cursor:pointer;
+}
+
+.primary-btn{
+    height:52px;
+    border:0;
+    background:#a98c5e;
+    color:#fff;
+    font-family:inherit;
+    font-size:13px;
+    letter-spacing:2px;
+    cursor:pointer;
+}
+
+.footer-note{
+    text-align:center;
+    margin-top:25px;
+    font-size:10px;
+    color:#aaa092;
+    letter-spacing:2px;
+}
+
+/* ================= 动画 ================= */
+
+.fade{
+    animation:fade .55s ease;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@media(max-width:380px){
+    .home h1{
+        font-size:27px;
+    }
+
+    .question{
+        font-size:21px;
+    }
+
+    .character-name{
+        font-size:29px;
+    }
+
+    .character-card{
+        min-height:470px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= 密码页 ================= -->
+
+<section id="passwordPage" class="page active">
+<div class="container">
+<div class="password-box fade">
+
+<div class="small-title">ANCIENT SOUL ARCHIVE</div>
+
+<h1>古代女子灵魂档案</h1>
+
+<p>
+输入测试提取码<br>
+开启属于你的古代灵魂画像
+</p>
+
+<input
+    id="codeInput"
+    class="code-input"
+    type="password"
+    maxlength="8"
+    inputmode="numeric"
+    placeholder="请输入提取码"
+>
+
+<button class="main-btn" onclick="checkCode()">进入测试</button>
+
+<div id="codeError" class="error"></div>
+
+</div>
+</div>
+</section>
+
+
+<!-- ================= 首页 ================= -->
+
+<section id="homePage" class="page">
+<div class="container">
+
+<div class="home fade">
+
+<div class="top-mark">花</div>
+
+<div class="eyebrow">SOUL ARCHIVE · ANCIENT WOMEN</div>
+
+<h1>你的灵魂最像哪位<br>古代女子？</h1>
+
+<div class="subtitle">
+三千风华，各有其魂。<br>
+你的性格、爱情观与人生选择，<br>
+或许早已藏着属于某位古代女子的影子。
+</div>
+
+<div class="intro-card">
+
+<div class="intro-line"></div>
+
+<p>
+这不是简单的人物选择题。<br>
+24道题，会从你的情感、性格、处世方式、
+独立程度、浪漫倾向与内在力量中，
+逐渐拼出一幅属于你的灵魂画像。
+</p>
+
+<div class="intro-info">
+<div>
+<strong>39</strong>
+位女子
+</div>
+<div>
+<strong>24</strong>
+道题目
+</div>
+<div>
+<strong>6</strong>
+种维度
+</div>
+</div>
+
+</div>
+
+<button class="main-btn start-btn" onclick="startQuiz()">
+开始测试
+</button>
+
+</div>
+</div>
+</section>
+
+
+<!-- ================= 测试页 ================= -->
+
+<section id="quizPage" class="page">
+<div class="container">
+
+<div class="quiz-top">
+<div class="quiz-label">SOUL TEST</div>
+<div class="quiz-count" id="quizCount">01 / 24</div>
+</div>
+
+<div class="progress">
+<div class="progress-bar" id="progressBar"></div>
+</div>
+
+<div id="questionArea"></div>
+
+</div>
+</section>
+
+
+<!-- ================= 结果页 ================= -->
+
+<section id="resultPage" class="page">
+<div class="container">
+
+<div class="result-wrap fade">
+
+<div class="result-header">
+
+<div class="archive">SOUL ARCHIVE · 灵魂档案</div>
+
+<h2>你的灵魂最像</h2>
+
+<h1 id="resultName">——</h1>
+
+</div>
+
+<div
+    class="character-card"
+    id="characterCard"
+>
+
+<div class="card-inner">
+
+<div class="period" id="resultPeriod"></div>
+
+<div class="symbol" id="resultSymbol"></div>
+
+<div class="character-title" id="resultTitle"></div>
+
+<div class="character-name" id="resultBigName"></div>
+
+<div class="quote" id="resultQuote"></div>
+
+<div class="match-box">
+
+<div class="match-label">
+<span>灵魂契合度</span>
+<strong class="match-number" id="matchNumber">0%</strong>
+</div>
+
+<div class="match-line">
+<div class="match-fill" id="matchFill"></div>
+</div>
+
+</div>
+
+<div class="keyword-section" id="keywords"></div>
+
+</div>
+
+</div>
+
+
+<div class="archive-card">
+
+<div class="section-label">
+你的灵魂画像
+</div>
+
+<div class="analysis" id="analysis"></div>
+
+<div class="traits" id="traits"></div>
+
+<div class="motto" id="motto"></div>
+
+</div>
+
+
+<div class="result-buttons">
+
+<button class="secondary-btn" onclick="restartQuiz()">
+重新测试
+</button>
+
+<button class="primary-btn" onclick="shareResult()">
+分享结果
+</button>
+
+</div>
+
+<div class="footer-note">
+每一次选择，都是你灵魂的一部分
+</div>
+
+</div>
+</div>
+</section>
+<script>
+
+/* =====================================================
+   基础设置
+===================================================== */
+
+const ACCESS_CODE = "9797";
+
+const DIMENSIONS = [
+    "坚韧",
+    "智慧",
+    "深情",
+    "独立",
+    "洒脱",
+    "谋略"
+];
+
+
+/* =====================================================
+   39位古代女子
+===================================================== */
+
+const characters = [
+
+{
+id:1,
+name:"虞姬",
+period:"秦末 · 楚汉",
+title:"霸王身侧的深情女子",
+symbol:"虞",
+color:"#c99791",
+bg:"#f5e6e1",
+profile:[72,40,98,52,35,40],
+keywords:["深情","忠贞","柔韧","决绝"],
+quote:"若情深至此，纵山河倾覆，也愿与你同往。",
+desc:"你身上有一种很明显的深情。你并不轻易爱人，但一旦认定，便会把感情看得极重。你敏感，却并不软弱；你温柔，却也有自己的底线。"
+},
+
+{
+id:2,
+name:"谢道韫",
+period:"东晋",
+title:"咏絮才女",
+symbol:"雪",
+color:"#9db4c4",
+bg:"#e9f0f3",
+profile:[55,96,62,83,65,71],
+keywords:["清醒","才情","从容","独立"],
+quote:"真正的锋芒，不必喧哗，自有光芒。",
+desc:"你的灵魂里有一种清醒感。你习惯自己思考，不轻易被环境左右。温柔是你的选择，而不是你的软肋。"
+},
+
+{
+id:3,
+name:"卓文君",
+period:"西汉",
+title:"当垆卖酒的才女",
+symbol:"琴",
+color:"#b99b75",
+bg:"#f2eadc",
+profile:[67,78,93,88,82,48],
+keywords:["勇敢","浪漫","自由","清醒"],
+quote:"愿得一心人，白首不相离。",
+desc:"你不是愿意被安排一生的人。爱情对你而言很重要，但真正重要的是，你仍然拥有选择自己人生的勇气。"
+},
+
+{
+id:4,
+name:"卫子夫",
+period:"西汉",
+title:"从歌女走入深宫",
+symbol:"凤",
+color:"#c9a77c",
+bg:"#f5ead4",
+profile:[72,63,84,64,45,76],
+keywords:["坚韧","温和","隐忍","聪慧"],
+quote:"命运把人推向何处，并不能决定她最终成为谁。",
+desc:"你拥有很强的适应能力。面对复杂环境，你不会轻易崩溃，而是慢慢找到自己的位置。"
+},
+
+{
+id:5,
+name:"班昭",
+period:"东汉",
+title:"续写史书的才女",
+symbol:"简",
+color:"#8da8a0",
+bg:"#e8f0ec",
+profile:[62,99,52,88,60,91],
+keywords:["智慧","理性","沉静","自持"],
+quote:"腹有诗书，心自有天地。",
+desc:"你的强大更多来自内在。你喜欢观察、思考和判断，不会因为一时情绪就轻易改变自己的决定。"
+},
+
+{
+id:6,
+name:"蔡文姬",
+period:"东汉",
+title:"乱世中的才女",
+symbol:"琴",
+color:"#9e9ab0",
+bg:"#eceaf1",
+profile:[92,83,96,62,42,55],
+keywords:["敏感","才情","深情","坚韧"],
+quote:"身处乱世，也不曾让灵魂失去声音。",
+desc:"你情绪细腻，感受力很强。别人忽略的细节，你往往能够第一时间察觉。"
+},
+
+{
+id:7,
+name:"甄宓",
+period:"三国",
+title:"洛神般的女子",
+symbol:"洛",
+color:"#bba3ba",
+bg:"#f0e8f1",
+profile:[84,75,88,69,52,61],
+keywords:["温柔","清雅","敏感","坚韧"],
+quote:"真正的美，从来不止于容貌。",
+desc:"你给人的第一印象通常是温柔安静，但熟悉你之后会发现，你其实有非常明确的原则。"
+},
+
+{
+id:8,
+name:"大乔",
+period:"东汉末年",
+title:"江东美人",
+symbol:"乔",
+color:"#cba4a0",
+bg:"#f5e7e4",
+profile:[89,61,91,58,47,45],
+keywords:["温柔","深情","端庄","柔韧"],
+quote:"温柔不是退让，而是内心拥有足够的力量。",
+desc:"你的感情表达偏温柔型。你很在意身边人的感受，也容易把重要的人放在自己之前。"
+},
+
+{
+id:9,
+name:"小乔",
+period:"东汉末年",
+title:"江东二乔",
+symbol:"花",
+color:"#d2a7a8",
+bg:"#f6e8e7",
+profile:[83,68,89,65,76,42],
+keywords:["灵动","浪漫","洒脱","聪慧"],
+quote:"人生短短，何妨活得漂亮而自由。",
+desc:"你比表面看起来更加洒脱。你喜欢美好的东西，也愿意为自己的快乐主动争取。"
+},
+
+{
+id:10,
+name:"貂蝉",
+period:"东汉末年",
+title:"乱世绝色",
+symbol:"月",
+color:"#a997ad",
+bg:"#eee9f1",
+profile:[79,86,82,73,69,95],
+keywords:["谋略","敏锐","果决","神秘"],
+quote:"美貌是表象，真正决定命运的是头脑。",
+desc:"你非常擅长观察局势。你很少把所有情绪都写在脸上，关键时刻反而异常冷静。"
+},
+
+{
+id:11,
+name:"蔡琰",
+period:"东汉",
+title:"乱世才女",
+symbol:"墨",
+color:"#9b9a8b",
+bg:"#ededdf",
+profile:[89,91,90,73,39,68],
+keywords:["坚韧","才情","深情","沉静"],
+quote:"经历过风雪的人，更懂得珍惜安宁。",
+desc:"你经历感很强。很多事情别人可能转身就忘，而你会把它们变成自己生命的一部分。"
+},
+
+{
+id:12,
+name:"绿珠",
+period:"西晋",
+title:"金谷佳人",
+symbol:"珠",
+color:"#9fb9aa",
+bg:"#e8f1ed",
+profile:[87,47,94,51,43,54],
+keywords:["深情","纯粹","忠贞","柔韧"],
+quote:"有些感情，不需要计算得失。",
+desc:"你对感情有着很强的纯粹感。你不喜欢复杂的试探，更珍惜真正的真心。"
+},
+
+{
+id:13,
+name:"苏蕙",
+period:"前秦",
+title:"回文织锦才女",
+symbol:"锦",
+color:"#b89e9a",
+bg:"#f1e7e2",
+profile:[73,98,81,84,52,82],
+keywords:["聪慧","细腻","理智","深情"],
+quote:"心有千结，也能织成锦绣。",
+desc:"你的情感与理智并存。你很敏感，却又习惯把情绪整理清楚之后再表达。"
+},
+
+{
+id:14,
+name:"花蕊夫人",
+period:"五代十国",
+title:"宫词才女",
+symbol:"蕊",
+color:"#d0a29a",
+bg:"#f6e6e1",
+profile:[81,73,90,58,55,69],
+keywords:["柔情","才情","深情","聪慧"],
+quote:"花有花期，人有自己的春天。",
+desc:"你浪漫而细腻，对生活中的微小美好很敏感。"
+},
+
+{
+id:15,
+name:"李清照",
+period:"宋代",
+title:"婉约词宗",
+symbol:"词",
+color:"#9eaaa0",
+bg:"#e8eeea",
+profile:[86,95,94,82,72,62],
+keywords:["清醒","才情","浪漫","坚韧"],
+quote:"生当作人杰，死亦为鬼雄。",
+desc:"你的灵魂里同时存在柔软与锋利。你可以温柔，也可以在真正重要的事情上毫不退让。"
+},
+
+{
+id:16,
+name:"朱淑真",
+period:"宋代",
+title:"幽居词人",
+symbol:"笺",
+color:"#c4a5aa",
+bg:"#f1e8eb",
+profile:[94,79,97,63,45,54],
+keywords:["敏感","深情","浪漫","孤清"],
+quote:"我的心事，不必人人都懂。",
+desc:"你拥有非常丰富的内心世界。你看起来安静，实际上情绪和想法都很浓烈。"
+},
+
+{
+id:17,
+name:"梁红玉",
+period:"南宋",
+title:"击鼓抗金的女将",
+symbol:"鼓",
+color:"#b78c76",
+bg:"#f0e1d6",
+profile:[89,72,77,96,79,92],
+keywords:["勇敢","果断","坚韧","担当"],
+quote:"真正的勇敢，是明知艰难仍然向前。",
+desc:"你遇到问题时很少选择逃避。越是关键时刻，你越容易展现出令人意外的力量。"
+},
+
+{
+id:18,
+name:"唐婉",
+period:"南宋",
+title:"沈园词人",
+symbol:"园",
+color:"#c1a2a0",
+bg:"#f2e8e5",
+profile:[91,66,99,53,35,45],
+keywords:["深情","温柔","遗憾","克制"],
+quote:"有些人离开了，却永远留在生命里。",
+desc:"你很重感情，也很容易记住那些没有说完的话。"
+},
+
+{
+id:19,
+name:"李师师",
+period:"北宋",
+title:"汴京名姝",
+symbol:"笛",
+color:"#a79eaa",
+bg:"#ebe8ee",
+profile:[82,76,88,69,91,74],
+keywords:["洒脱","聪慧","浪漫","通透"],
+quote:"世间繁华，不过一场清醒的梦。",
+desc:"你很懂得人与人之间的距离。你可以热烈，也可以抽身。"
+},
+
+{
+id:20,
+name:"谢希孟",
+period:"宋代",
+title:"才情女子",
+symbol:"兰",
+color:"#9cae9b",
+bg:"#e8eee5",
+profile:[79,93,76,87,65,72],
+keywords:["智慧","淡然","独立","清醒"],
+quote:"不争，不代表没有自己的方向。",
+desc:"你喜欢有自己的节奏，不愿意被外界轻易定义。"
+},
+
+{
+id:21,
+name:"唐赛儿",
+period:"明代",
+title:"白莲教首领",
+symbol:"莲",
+color:"#c39a82",
+bg:"#f1e5d9",
+profile:[78,80,63,98,94,97],
+keywords:["独立","果敢","自由","谋略"],
+quote:"命运若不给路，那便自己开一条路。",
+desc:"你骨子里有很强的独立意识。你不喜欢被控制，也不喜欢把人生交给别人安排。"
+},
+
+{
+id:22,
+name:"秦良玉",
+period:"明代",
+title:"巾帼名将",
+symbol:"枪",
+color:"#a98f7b",
+bg:"#eee4d9",
+profile:[96,78,70,98,71,96],
+keywords:["担当","坚韧","果敢","忠诚"],
+quote:"一身戎装，也有自己的温柔。",
+desc:"你属于越有压力越容易成长的人。真正需要你承担责任时，你往往比自己想象中更强。"
+},
+
+{
+id:23,
+name:"柳如是",
+period:"明末清初",
+title:"秦淮才女",
+symbol:"柳",
+color:"#9eaa91",
+bg:"#e8eee2",
+profile:[73,95,88,99,91,88],
+keywords:["独立","锋利","才情","自由"],
+quote:"女子也可以拥有自己的天地。",
+desc:"你很难被传统意义上的框架束缚。你有自己的审美、思想和选择。"
+},
+
+{
+id:24,
+name:"陈圆圆",
+period:"明末清初",
+title:"秦淮名姝",
+symbol:"圆",
+color:"#c5a0a0",
+bg:"#f1e6e6",
+profile:[83,62,94,56,64,57],
+keywords:["柔情","美感","深情","敏感"],
+quote:"世事如梦，唯有真情难忘。",
+desc:"你对感情和氛围特别敏锐，容易被真诚与细节打动。"
+},
+
+{
+id:25,
+name:"李香君",
+period:"明末清初",
+title:"桃花扇女子",
+symbol:"扇",
+color:"#bd9285",
+bg:"#f2e3de",
+profile:[89,88,91,91,72,82],
+keywords:["坚定","深情","清醒","勇敢"],
+quote:"纵使风雨，也不改初心。",
+desc:"你不是盲目的深情，而是认定之后愿意承担后果的深情。"
+},
+
+{
+id:26,
+name:"马湘兰",
+period:"明代",
+title:"秦淮名姝",
+symbol:"兰",
+color:"#a7ae99",
+bg:"#e9eee4",
+profile:[79,89,85,94,86,63],
+keywords:["雅致","独立","才情","洒脱"],
+quote:"一枝兰，足以自成天地。",
+desc:"你喜欢精神世界的丰富，不太愿意用世俗标准衡量自己。"
+},
+
+{
+id:27,
+name:"顾横波",
+period:"明末清初",
+title:"柳巷才女",
+symbol:"波",
+color:"#a7a9b7",
+bg:"#eaebf1",
+profile:[78,91,89,88,85,79],
+keywords:["聪慧","自由","才情","洒脱"],
+quote:"人生自有自己的章法。",
+desc:"你很会处理复杂的人际关系，同时又非常珍惜个人空间。"
+},
+
+{
+id:28,
+name:"董小宛",
+period:"明末清初",
+title:"秦淮佳人",
+symbol:"宛",
+color:"#c5a998",
+bg:"#f2e9df",
+profile:[96,70,98,60,68,51],
+keywords:["温柔","深情","雅致","浪漫"],
+quote:"愿与你共一盏清茶，慢慢看岁月。",
+desc:"你是非常典型的温柔型灵魂。你对关系中的陪伴和细节格外看重。"
+},
+
+{
+id:29,
+name:"陈妙常",
+period:"宋代",
+title:"传奇才女",
+symbol:"琴",
+color:"#b39caf",
+bg:"#eee8f0",
+profile:[89,83,96,71,68,67],
+keywords:["浪漫","勇敢","深情","灵动"],
+quote:"喜欢一个人，本身就是一种勇气。",
+desc:"你很相信心动，也愿意为了真正喜欢的人突破一些原本的界限。"
+},
+
+{
+id:30,
+name:"西施",
+period:"春秋",
+title:"浣纱美人",
+symbol:"浣",
+color:"#9db7b1",
+bg:"#e5efed",
+profile:[91,69,89,54,48,77],
+keywords:["温柔","坚韧","深情","隐忍"],
+quote:"柔弱之中，也可以藏着惊人的力量。",
+desc:"你给人的感觉往往柔和，但其实非常能忍耐，也很有责任感。"
+},
+
+{
+id:31,
+name:"王昭君",
+period:"西汉",
+title:"出塞明妃",
+symbol:"雁",
+color:"#a8abb8",
+bg:"#eaebf1",
+profile:[92,75,85,78,82,74],
+keywords:["从容","坚韧","大气","清醒"],
+quote:"既然远方是命运，那便把路走成自己的风景。",
+desc:"你拥有很强的环境适应力。面对人生变化，你会慢慢找到属于自己的方式。"
+},
+
+{
+id:32,
+name:"貂蝉",
+period:"东汉末年",
+title:"乱世绝色",
+symbol:"月",
+color:"#a997ad",
+bg:"#eee9f1",
+profile:[79,86,82,73,69,95],
+keywords:["谋略","敏锐","果决","神秘"],
+quote:"真正的美貌，从来不止于容颜。",
+desc:"你善于观察局势，也懂得什么时候表达，什么时候沉默。"
+},
+
+{
+id:33,
+name:"杨贵妃",
+period:"唐代",
+title:"盛唐贵妃",
+symbol:"霓",
+color:"#c79c92",
+bg:"#f3e5df",
+profile:[94,66,95,65,90,45],
+keywords:["浪漫","感性","热烈","自由"],
+quote:"人生得意须尽欢。",
+desc:"你热爱生活，也不吝啬表达自己的喜爱。你希望人生能够活得鲜活。"
+},
+
+{
+id:34,
+name:"武则天",
+period:"唐代",
+title:"一代女皇",
+symbol:"曌",
+color:"#b29a70",
+bg:"#f0e7d5",
+profile:[67,99,55,100,69,100],
+keywords:["野心","智慧","独立","谋略"],
+quote:"人生从来不是别人替你写好的。",
+desc:"你拥有很强的目标感。你不喜欢把主动权交给别人，更愿意自己掌控人生。"
+},
+
+{
+id:35,
+name:"上官婉儿",
+period:"唐代",
+title:"巾帼宰相",
+symbol:"墨",
+color:"#9d9f9b",
+bg:"#ebede8",
+profile:[65,100,66,93,71,98],
+keywords:["智慧","谋略","才情","清醒"],
+quote:"真正的锋芒，是在复杂世界里保持清醒。",
+desc:"你擅长观察，也很懂得权衡。你不会因为一时情绪轻易做决定。"
+},
+
+{
+id:36,
+name:"鱼玄机",
+period:"唐代",
+title:"晚唐女诗人",
+symbol:"鱼",
+color:"#a7aaa1",
+bg:"#e9ece6",
+profile:[83,91,93,92,86,72],
+keywords:["才情","自由","敏感","洒脱"],
+quote:"我本来就是一个完整的人。",
+desc:"你很看重精神自由。你希望别人喜欢真实的你，而不是被塑造出来的你。"
+},
+
+{
+id:37,
+name:"花蕊夫人",
+period:"五代十国",
+title:"宫词才女",
+symbol:"蕊",
+color:"#d0a29a",
+bg:"#f6e6e1",
+profile:[81,73,90,58,55,69],
+keywords:["柔情","才情","深情","聪慧"],
+quote:"花有花期，人有自己的春天。",
+desc:"你浪漫而细腻，对生活中的微小美好很敏感。"
+},
+
+{
+id:38,
+name:"卓文君",
+period:"西汉",
+title:"当垆才女",
+symbol:"琴",
+color:"#b99b75",
+bg:"#f2eadc",
+profile:[67,78,93,88,82,48],
+keywords:["勇敢","浪漫","自由","清醒"],
+quote:"愿得一心人，白首不相离。",
+desc:"你愿意为了真正喜欢的人主动选择自己的人生。"
+},
+
+{
+id:39,
+name:"苏小小",
+period:"南齐",
+title:"钱塘才女",
+symbol:"桥",
+color:"#a6b1b3",
+bg:"#e9eff0",
+profile:[88,84,96,79,94,56],
+keywords:["洒脱","浪漫","自由","灵秀"],
+quote:"妾乘油壁车，郎骑青骢马。",
+desc:"你有一种轻盈而自由的灵魂，不喜欢被沉重的规则困住。"
+}
+
+];
+
+
+/* =====================================================
+   24道题
+===================================================== */
+
+const questions = [
+
+{
+q:"如果人生突然出现一条完全陌生的路，你会？",
+options:[
+["先观察清楚，再决定要不要走",[55,85,35,75,35,65]],
+["既然来了，就走下去看看",[65,45,55,55,95,35]],
+["只要是自己想要的，就去试试",[55,70,70,95,88,40]],
+["先考虑这条路会改变什么",[35,95,35,70,45,90]]
+]
+},
+
+{
+q:"在感情里，你最在意的是？",
+options:[
+["对方是否始终坚定",[75,55,95,45,30,75]],
+["能不能真正理解自己",[60,90,85,70,55,60]],
+["有没有自由呼吸的空间",[55,60,72,90,98,45]],
+["是否愿意在关键时刻陪着自己",[90,55,98,45,45,65]]
+]
+},
+
+{
+q:"朋友眼中的你更接近？",
+options:[
+["温柔好说话",[95,45,75,40,55,35]],
+["很有自己的想法",[55,90,50,95,70,55]],
+["看起来安静，其实很有主见",[65,90,70,90,55,80]],
+["气氛担当，比较随性",[70,45,70,65,98,35]]
+]
+},
+
+{
+q:"遇到别人误解你时，你通常会？",
+options:[
+["解释清楚",[60,85,60,65,45,55]],
+["不解释，时间会证明",[65,75,45,85,80,65]],
+["看情况，值得的人才解释",[45,95,55,90,70,88]],
+["其实会难过很久",[85,60,90,45,30,35]]
+]
+},
+
+{
+q:"如果很爱的人让你失望，你会？",
+options:[
+["再给一次机会",[80,45,98,45,30,50]],
+["认真谈一次，看能不能解决",[65,85,80,65,40,70]],
+["离开，尊严比感情重要",[50,80,60,98,85,65]],
+["嘴上说没事，心里却很难放下",[90,65,98,50,30,40]]
+]
+},
+
+{
+q:"你最欣赏自己的哪一点？",
+options:[
+["温柔",[100,40,85,45,40,35]],
+["聪明",[50,100,60,80,55,85]],
+["有勇气",[75,65,65,90,88,90]],
+["重感情",[90,45,100,40,35,45]]
+]
+},
+
+{
+q:"你希望未来的生活是什么样？",
+options:[
+["安稳，有喜欢的人陪着",[90,45,95,45,35,60]],
+["拥有自己的事业",[55,95,45,100,65,95]],
+["自由自在，想去哪就去哪",[55,60,70,92,100,45]],
+["有自己的精神世界",[65,100,80,92,75,70]]
+]
+},
+
+{
+q:"你更容易被哪一种人吸引？",
+options:[
+["温柔可靠的人",[95,50,90,40,30,65]],
+["聪明有思想的人",[55,100,65,85,55,90]],
+["自由洒脱的人",[55,60,75,90,100,50]],
+["外冷内热的人",[70,75,95,65,45,70]]
+]
+},
+
+{
+q:"如果你拥有一次重新选择人生的机会，你会？",
+options:[
+["选择自己真正爱的人",[75,55,100,55,50,50]],
+["选择自己真正想做的事",[50,90,55,100,80,80]],
+["什么都不改变",[70,65,80,60,55,50]],
+["去一个完全不同的地方生活",[55,60,65,90,100,45]]
+]
+},
+
+{
+q:"面对竞争，你通常？",
+options:[
+["不想争，但也不会输",[60,75,40,80,65,75]],
+["既然决定参加，就认真做到最好",[55,95,35,90,70,98]],
+["更愿意按照自己的节奏来",[55,65,40,95,92,65]],
+["会提前观察所有人的动向",[45,100,30,85,55,100]]
+]
+},
+
+{
+q:"你最不能接受的是？",
+options:[
+["被背叛",[80,50,100,50,25,65]],
+["被控制",[45,65,55,100,100,55]],
+["被轻视",[45,90,35,100,70,95]],
+["被迫失去重要的人",[95,40,100,35,25,55]]
+]
+},
+
+{
+q:"你对爱情的态度更像？",
+options:[
+["认定一个人就很久",[75,40,100,45,25,60]],
+["喜欢，但不会失去自己",[55,75,85,95,75,55]],
+["顺其自然，来了就珍惜",[70,55,80,75,95,40]],
+["宁缺毋滥",[55,95,65,100,70,85]]
+]
+},
+
+{
+q:"如果你喜欢的人不喜欢你，你会？",
+options:[
+["默默放下",[70,60,80,75,55,45]],
+["再努力一次",[65,55,90,50,35,55]],
+["转身离开，不委屈自己",[45,75,55,100,90,65]],
+["会难过，但最终还是会走出来",[85,65,95,60,55,40]]
+]
+},
+
+{
+q:"你认为真正的强大是？",
+options:[
+["即使受伤，也依然温柔",[95,70,90,65,45,50]],
+["拥有选择自己人生的能力",[55,90,50,100,90,85]],
+["关键时刻能够承担责任",[90,75,65,90,65,100]],
+["看透很多事，却依旧，却依旧热爱生活",[80,95,80,85,90,70]]
+]
+},
+
+{
+q:"你更喜欢哪种环境？",
+options:[
+["安静的小院",[85,60,85,65,45,40]],
+["书房与卷轴",[55,100,55,85,55,80]],
+["山水之间",[65,75,70,85,100,55]],
+["热闹繁华之地",[65,65,75,65,95,65]]
+]
+},
+
+{
+q:"如果朋友遇到困难，你会？",
+options:[
+["陪着她度过",[100,55,95,55,35,55]],
+["帮她分析问题",[60,100,65,85,50,90]],
+["直接行动解决问题",[75,75,55,95,80,100]],
+["尊重她自己的选择",[55,85,65,100,95,65]]
+]
+},
+
+{
+q:"你最常出现的一种情绪是？",
+options:[
+["细腻敏感",[95,65,95,50,35,45]],
+["平静克制",[55,95,65,85,65,80]],
+["热烈兴奋",[70,55,85,65,100,40]],
+["警觉清醒",[45,100,50,95,55,100]]
+]
+},
+
+{
+q:"如果有人伤害了你，你会？",
+options:[
+["选择原谅",[85,50,85,50,35,40]],
+["记住，但继续生活",[65,90,65,90,70,80]],
+["彻底远离",[50,75,55,100,90,70]],
+["想办法让自己变得更强",[60,95,40,100,75,100]]
+]
+},
+
+{
+q:"你希望别人如何记住你？",
+options:[
+["温柔善良",[100,45,80,50,45,40]],
+["聪明有才华",[55,100,55,90,65,90]],
+["勇敢有力量",[75,70,55,100,75,100]],
+["活得自由漂亮",[65,75,75,95,100,60]]
+]
+},
+
+{
+q:"如果爱情和事业发生冲突，你会？",
+options:[
+["尽量两边都守住",[75,75,85,65,45,65]],
+["事业更重要",[45,95,40,100,65,100]],
+["看当下真正想要什么",[65,70,85,90,95,55]],
+["爱的人重要，但不能失去自己",[75,80,90,100,75,65]]
+]
+},
+
+{
+q:"你最容易心软的瞬间是？",
+options:[
+["看到别人受委屈",[100,45,85,45,30,50]],
+["看到曾经爱过的人",[85,45,100,40,25,45]],
+["有人认真向你道歉",[80,65,85,65,40,60]],
+["有人需要你的帮助",[95,55,80,45,30,75]]
+]
+},
+
+{
+q:"你希望自己拥有哪一种能力？",
+options:[
+["看透人心",[55,100,70,85,55,100]],
+["永远保持勇气",[80,65,60,95,80,95]],
+["永远保持自由",[55,75,70,100,100,60]],
+["永远拥有爱人的能力",[95,50,100,55,40,45]]
+]
+},
+
+{
+q:"如果人生是一场旅行，你更愿意？",
+options:[
+["和喜欢的人一起",[90,50,100,50,65,55]],
+["一个人慢慢走",[55,75,65,100,95,55]],
+["去很多没去过的地方",[60,70,70,90,100,60]],
+["去一个能改变自己的地方",[55,90,55,95,85,90]]
+]
+},
+
+{
+q:"最后，如果只能留下一个关键词，你会选？",
+options:[
+["深情",[80,50,100,45,35,55]],
+["清醒",[55,100,55,95,65,90]],
+["自由",[55,75,65,100,100,55]],
+["勇敢",[85,70,55,100,80,100]]
+]
+}
+
+];
+
+
+/* =====================================================
+   页面控制
+===================================================== */
+
+function showPage(id){
+    document.querySelectorAll(".page").forEach(p=>{
+        p.classList.remove("active");
+    });
+
+    document.getElementById(id).classList.add("active");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+/* =====================================================
+   密码
+===================================================== */
+
+function checkCode(){
+
+    const value=document.getElementById("codeInput").value.trim();
+    const error=document.getElementById("codeError");
+
+    if(value===ACCESS_CODE){
+        error.textContent="";
+        showPage("homePage");
+    }else{
+        error.textContent="提取码不正确，请重新输入";
+    }
+}
+
+document.getElementById("codeInput").addEventListener("keydown",function(e){
+    if(e.key==="Enter"){
+        checkCode();
+    }
+});
+
+
+/* =====================================================
+   测试状态
+===================================================== */
+
+let currentQuestion=0;
+let answers=[];
+
+
+/* =====================================================
+   开始
+===================================================== */
+
+function startQuiz(){
+
+    currentQuestion=0;
+    answers=[];
+
+    showPage("quizPage");
+
+    renderQuestion();
+}
+
+
+/* =====================================================
+   渲染题目
+===================================================== */
+
+function renderQuestion(){
+
+    const q=questions[currentQuestion];
+
+    document.getElementById("quizCount").textContent=
+        String(currentQuestion+1).padStart(2,"0")+" / "+questions.length;
+
+    document.getElementById("progressBar").style.width=
+        ((currentQuestion)/questions.length*100)+"%";
+
+    const area=document.getElementById("questionArea");
+
+    area.innerHTML=`
+        <div class="fade">
+
+            <div class="question-number">
+                QUESTION ${String(currentQuestion+1).padStart(2,"0")}
+            </div>
+
+            <div class="question">
+                ${q.q}
+            </div>
+
+            <div class="options">
+
+                ${q.options.map((option,index)=>`
+
+                    <button
+                        class="option"
+                        onclick="selectAnswer(${index})"
+                    >
+                        ${option[0]}
+                    </button>
+
+                `).join("")}
+
+            </div>
+
+        </div>
+    `;
+}
+
+
+/* =====================================================
+   选择答案
+===================================================== */
+
+function selectAnswer(index){
+
+    answers[currentQuestion]=questions[currentQuestion].options[index][1];
+
+    currentQuestion++;
+
+    if(currentQuestion>=questions.length){
+
+        document.getElementById("progressBar").style.width="100%";
+
+        setTimeout(calculateResult,180);
+
+    }else{
+
+        renderQuestion();
+    }
+}
+
+
+/* =====================================================
+   向量计算
+===================================================== */
+
+function addVectors(a,b){
+
+    return a.map((v,i)=>v+b[i]);
+}
+
+function normalize(v){
+
+    const max=Math.max(...v);
+    const min=Math.min(...v);
+
+    return v.map(x=>
+        ((x-min)/(max-min||1))*100
+    );
+}
+
+function cosine(a,b){
+
+    let dot=0;
+    let aa=0;
+    let bb=0;
+
+    for(let i=0;i<a.length;i++){
+
+        dot+=a[i]*b[i];
+        aa+=a[i]*a[i];
+        bb+=b[i]*b[i];
+    }
+
+    if(!aa||!bb)return 0;
+
+    return dot/(Math.sqrt(aa)*Math.sqrt(bb));
+}
+
+function distance(a,b){
+
+    let total=0;
+
+    for(let i=0;i<a.length;i++){
+
+        total+=Math.pow(a[i]-b[i],2);
+    }
+
+    return Math.sqrt(total);
+}
+
+
+/* =====================================================
+   39人物均衡修正
+===================================================== */
+
+const BALANCE_STRENGTH=0.78;
+
+function calculateNaturalBias(){
+
+    const values=[];
+
+    characters.forEach(ch=>{
+
+        let total=0;
+        let count=0;
+
+        questions.forEach(q=>{
+
+            q.options.forEach(option=>{
+
+                total+=cosine(ch.profile,option[1]);
+                count++;
+            });
+        });
+
+        values.push(total/count);
+    });
+
+    const average=
+        values.reduce((a,b)=>a+b,0)/values.length;
+
+    return values.map(v=>
+        (v-average)*BALANCE_STRENGTH
+    );
+}
+
+const naturalBias=calculateNaturalBias();
+
+
+/* =====================================================
+   人物专属微调
+===================================================== */
+
+function deterministicTie(id){
+
+    const x=Math.sin(id*99991)*43758.5453;
+
+    return (x-Math.floor(x))*0.00001;
+}
+
+
+/* =====================================================
+   计算结果
+===================================================== */
+
+function calculateResult(){
+
+    let profile=[0,0,0,0,0,0];
+
+    answers.forEach(vector=>{
+        profile=addVectors(profile,vector);
+    });
+
+    profile=profile.map(v=>v/answers.length);
+
+    let results=[];
+
+    characters.forEach((ch,index)=>{
+
+        const cos=cosine(profile,ch.profile);
+
+        const dist=distance(profile,ch.profile);
+
+        const raw=
+            cos*100
+            -
+            dist*0.085;
+
+        const balanced=
+            raw
+            -
+            naturalBias[index]*100
+            +
+            deterministicTie(ch.id);
+
+        results.push({
+            character:ch,
+            score:balanced,
+            raw:raw
+        });
+    });
+
+    results.sort((a,b)=>b.score-a.score);
+
+    const winner=results[0];
+
+    showResult(winner,results);
+}
+
+
+/* =====================================================
+   结果展示
+===================================================== */
+
+function showResult(result,results){
+
+    const ch=result.character;
+
+    const card=document.getElementById("characterCard");
+
+    card.style.setProperty("--character-color",ch.color);
+    card.style.setProperty("--character-bg",ch.bg);
+
+    document.getElementById("resultName").textContent=ch.name;
+    document.getElementById("resultBigName").textContent=ch.name;
+    document.getElementById("resultPeriod").textContent=ch.period;
+    document.getElementById("resultTitle").textContent=ch.title;
+    document.getElementById("resultSymbol").textContent=ch.symbol;
+    document.getElementById("resultQuote").textContent=
+        "「 "+ch.quote+" 」";
+
+    const sorted=results
+        .map(x=>x.score)
+        .sort((a,b)=>b-a);
+
+    const top=sorted[0];
+    const second=sorted[1];
+
+    let match=
+        88+
+        Math.max(
+            0,
+            Math.min(
+                9,
+                (top-second)*0.65
+            )
+        );
+
+    match=Math.round(match);
+
+    document.getElementById("matchNumber").textContent=
+        match+"%";
+
+    setTimeout(()=>{
+
+        document.getElementById("matchFill").style.width=
+            match+"%";
+
+    },100);
+
+    document.getElementById("keywords").innerHTML=
+        ch.keywords.map(k=>
+            `<span class="keyword">${k}</span>`
+        ).join("");
+
+    document.getElementById("analysis").textContent=
+        ch.desc+
+        " "+
+        getPersonalAnalysis(ch);
+
+    renderTraits(ch.profile);
+
+    document.getElementById("motto").textContent=
+        ch.quote;
+
+    showPage("resultPage");
+}
+
+
+/* =====================================================
+   个性化分析
+===================================================== */
+
+function getPersonalAnalysis(ch){
+
+    const maxIndex=
+        ch.profile.indexOf(Math.max(...ch.profile));
+
+    const texts=[
+
+        "你身上最明显的，是一种柔韧的力量。你可以温柔，却不会轻易被击倒。",
+
+        "你很擅长观察与思考。很多时候，你真正的优势并不是表达，而是看得比别人更远。",
+
+        "你对感情的感受很深。你不轻易动心，但真正放进心里的人，很难被轻易替代。",
+
+        "你非常重视自我价值。你可以爱一个人，却不会愿意彻底失去自己。",
+
+        "你骨子里有自由感。你喜欢按照自己的节奏生活，不愿意被别人定义。",
+
+        "你拥有很强的局势判断力。面对复杂的人和事，你往往会先观察，再行动。"
+
+    ];
+
+    return texts[maxIndex];
+}
+
+
+/* =====================================================
+   六维画像
+===================================================== */
+
+function renderTraits(profile){
+
+    const names=[
+        "坚韧",
+        "智慧",
+        "深情",
+        "独立",
+        "洒脱",
+        "谋略"
+    ];
+
+    const html=names.map((name,index)=>{
+
+        const value=Math.round(profile[index]);
+
+        return`
+
+        <div class="trait-row">
+
+            <span>${name}</span>
+
+            <div class="trait-line">
+                <div
+                    class="trait-fill"
+                    style="width:${value}%"
+                ></div>
+            </div>
+
+            <span class="trait-value">
+                ${value}
+            </span>
+
+        </div>
+
+        `;
+
+    }).join("");
+
+    document.getElementById("traits").innerHTML=html;
+}
+
+
+/* =====================================================
+   重新测试
+===================================================== */
+
+function restartQuiz(){
+
+    answers=[];
+    currentQuestion=0;
+
+    showPage("homePage");
+}
+
+
+/* =====================================================
+   分享
+===================================================== */
+
+function shareResult(){
+
+    const name=
+        document.getElementById("resultName").textContent;
+
+    const text=
+        `测一测｜我的灵魂最像${name}`;
+
+    if(navigator.share){
+
+        navigator.share({
+            title:"古代女子灵魂测试",
+            text:text
+        }).catch(()=>{});
+
+    }else{
+
+        navigator.clipboard?.writeText(text);
+
+        alert("结果文案已复制，可以去小红书分享啦");
+    }
+
+}
+
+</script>
+
+</body>
+</html>
+
